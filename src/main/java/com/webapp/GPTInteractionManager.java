@@ -63,84 +63,82 @@ public class GPTInteractionManager {
 
     /**
      * --write 3 page essay--
-
-    /*Python:
-    def iterateParagraphs(prompt, numPages):
-        """
-        :param prompt:
-        :param numPages:
-        :return:
-        """
-        for i in range(numPages):
-            generateEssay(prompt)
-
-
-    def generateEssay(prompt):
-        """
-        Description: write a paragraph tuning the openai gpt3 parmaters to maximize relevance the content
-        :param prompt:
-        System.out.println("\nBrewing up a story...");
-        CompletionRequest completionRequest = CompletionRequest.builder()
-                .prompt(this.promptText)
-                .temperature(0.0-1.0)
-                .maxTokens(000)
-                .topP(0.0-1.0)
-                .frequencyPenalty(0.0-1.0)
-                .n(0.0-1.0)
-                .bestOf(2)
-                .presencePenalty(0.0-1.0)
-                .echo(true)
-                .build();
-        CompletionResult completion = service.createCompletion("davinci", completionRequest);
-        for (CompletionChoice line : completion.getChoices()) {
-            essayArray.add(line.getText());
-        }
-        System.out.println(essayArray);
-
-
-	    different custom params:
-
-        maxlength: max number of words in the generated essay
-        temperature: a float between 0 and 1, defines how much of the probability distribution is
-                    used to select the next word.
-        topp: a float between 0 and 1, defines how much of the probability distribution is
-            used to select the next word.
-        topk: a positive integer, defines how many of the top probabilities are used to
-            select the next word.
-        norepeatngramsize: a positive integer, defines how many words back to look for
-                            ngram repeats.
-        numreturnsequences: a positive integer, defines the number of sequences to generate.
-                            If 1, a single sequence is generated.
-        numbeams: a positive integer, defines how many beams to break the generated sequences
-                into.
-        earlystopping: a boolean, defines whether to stop early if we've reached the
-                        numbeams limit.
-        lengthpenalty: a float between 0 and 1, defines how much to penalize short generated
-                        sequences.
-        numsamples: a positive integer, defines how many samples to generate.
-                    If 1, a single sample is generated.
-        numreturnsequences: a positive integer, defines the number of sequences to generate.
-                            If 1, a single sequence is generated.
-        numbeams: a positive integer, defines how many beams to break the generated sequences
-                into.
-        earlystopping: a boolean, defines whether to stop early if we've reached the
-                        numbeams limit.
-        lengthpenalty: a float between 0 and 1, defines how much to penalize short generated
-                        sequences.
-        numsamples: a positive integer, defines how many samples to generate.
-                    If 1, a single sample is generated.
-        numreturnsequences: a positive integer, defines the number of sequences to generate.
-                            If 1, a single sequence is generated
-        """
-
-
-
-    */
+     * <p>
+     * /*Python:
+     * def iterateParagraphs(prompt, numPages):
+     * """
+     * :param prompt:
+     * :param numPages:
+     * :return:
+     * """
+     * for i in range(numPages):
+     * generateEssay(prompt)
+     * <p>
+     * <p>
+     * def generateEssay(prompt):
+     * """
+     * Description: write a paragraph tuning the openai gpt3 parmaters to maximize relevance the content
+     * :param prompt:
+     * System.out.println("\nBrewing up a story...");
+     * CompletionRequest completionRequest = CompletionRequest.builder()
+     * .prompt(this.promptText)
+     * .temperature(0.0-1.0)
+     * .maxTokens(000)
+     * .topP(0.0-1.0)
+     * .frequencyPenalty(0.0-1.0)
+     * .n(0.0-1.0)
+     * .bestOf(2)
+     * .presencePenalty(0.0-1.0)
+     * .echo(true)
+     * .build();
+     * CompletionResult completion = service.createCompletion("davinci", completionRequest);
+     * for (CompletionChoice line : completion.getChoices()) {
+     * essayArray.add(line.getText());
+     * }
+     * System.out.println(essayArray);
+     * <p>
+     * <p>
+     * different custom params:
+     * <p>
+     * maxlength: max number of words in the generated essay
+     * temperature: a float between 0 and 1, defines how much of the probability distribution is
+     * used to select the next word.
+     * topp: a float between 0 and 1, defines how much of the probability distribution is
+     * used to select the next word.
+     * topk: a positive integer, defines how many of the top probabilities are used to
+     * select the next word.
+     * norepeatngramsize: a positive integer, defines how many words back to look for
+     * ngram repeats.
+     * numreturnsequences: a positive integer, defines the number of sequences to generate.
+     * If 1, a single sequence is generated.
+     * numbeams: a positive integer, defines how many beams to break the generated sequences
+     * into.
+     * earlystopping: a boolean, defines whether to stop early if we've reached the
+     * numbeams limit.
+     * lengthpenalty: a float between 0 and 1, defines how much to penalize short generated
+     * sequences.
+     * numsamples: a positive integer, defines how many samples to generate.
+     * If 1, a single sample is generated.
+     * numreturnsequences: a positive integer, defines the number of sequences to generate.
+     * If 1, a single sequence is generated.
+     * numbeams: a positive integer, defines how many beams to break the generated sequences
+     * into.
+     * earlystopping: a boolean, defines whether to stop early if we've reached the
+     * numbeams limit.
+     * lengthpenalty: a float between 0 and 1, defines how much to penalize short generated
+     * sequences.
+     * numsamples: a positive integer, defines how many samples to generate.
+     * If 1, a single sample is generated.
+     * numreturnsequences: a positive integer, defines the number of sequences to generate.
+     * If 1, a single sequence is generated
+     * """
+     */
 
     // convert to java
-    private void iterateParagraphs(String prompt, int numParagraphs) {;
+    private void iterateParagraphs(String prompt, int numParagraphs) {
+        this.result = prompt;
         for (int i = 0; i < numParagraphs; i++) {
-            generateEssay(prompt);
+            generateEssay(this.result);
         }
 
     }
@@ -155,18 +153,17 @@ public class GPTInteractionManager {
                 .temperature(0.7)
                 .maxTokens(180)
                 .topP(1.0)
-                .frequencyPenalty(0.4)
-                .presencePenalty(0.3)
-                .echo(true)
+                .frequencyPenalty(0.1)
+                .presencePenalty(0.7)
+                .echo(false)
                 .build();
         CompletionResult completion = service.createCompletion("davinci", completionRequest);
         for (CompletionChoice line : completion.getChoices()) {
             essayArray.add(line.getText());
         }
 
-
+        this.result = prompt + "";
         // print the generated essay
-        this.result = "";
         for (String line : this.essayArray) {
             this.result = this.result + line + "\n";
         }
