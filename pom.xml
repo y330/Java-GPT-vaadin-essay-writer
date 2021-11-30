@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!-- Vaadin project from https://github.com/vaadin/skeleton-starter-flow-spring -->
     <groupId>com.example</groupId>
-    <artifactId>my-todo</artifactId>
-    <name>My Todo</name>
+    <artifactId>essay-generator</artifactId>
+    <name>Essay Generator</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -61,18 +62,18 @@
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/client -->
 
-            </dependencies>
-        </dependencyManagement>
+        </dependencies>
+    </dependencyManagement>
 
-        <dependencies>
-            <dependency>
-                <groupId>com.theokanning.openai-gpt3-java</groupId>
-                <artifactId>client</artifactId>
-                <version>0.4.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <!-- Replace artifactId with vaadin-core to use only free components -->
+    <dependencies>
+        <dependency>
+            <groupId>com.theokanning.openai-gpt3-java</groupId>
+            <artifactId>client</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <!-- Replace artifactId with vaadin-core to use only free components -->
             <artifactId>vaadin</artifactId>
             <exclusions>
                 <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
@@ -152,7 +153,7 @@
             <scope>test</scope>
         </dependency>
 
-</dependencies>
+    </dependencies>
 
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
@@ -212,6 +213,14 @@
                     </plugin>
                 </plugins>
             </build>
+            <!-- Omitted -->
+            <dependencies>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                </dependency>
+            </dependencies>
+
         </profile>
 
         <profile>

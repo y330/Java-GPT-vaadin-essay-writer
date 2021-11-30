@@ -153,8 +153,8 @@ public class GPTInteractionManager {
                 .temperature(0.7)
                 .maxTokens(180)
                 .topP(1.0)
-                .frequencyPenalty(0.1)
-                .presencePenalty(0.7)
+                .frequencyPenalty(0.7)
+                .presencePenalty(1.0)
                 .echo(false)
                 .build();
         CompletionResult completion = service.createCompletion("davinci", completionRequest);

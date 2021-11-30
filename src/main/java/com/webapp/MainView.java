@@ -33,7 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @PWA(name = "Easy EssayAbstract - GPT3 for lazy peeps",
         shortName = "Easy EssayAbstract",
         description = "This is an example GPT3 used to make lives better.",
-        enableInstallPrompt = false)
+        enableInstallPrompt = true)
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/vaadin-text-field-styles.css", themeFor = "vaadin-text-field")
 public class MainView extends VerticalLayout {
