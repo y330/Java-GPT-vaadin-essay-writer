@@ -10,9 +10,10 @@ The project follow Maven's [standard directory layout structure](https://maven.a
 - Under the `srs/main/java` are located Application sources
     - `Application.java` is a runnable Java application class and the app's 
       starting point
-    - `GreetService.java` is a Spring service class
-    - `MainView.java` is an example Vaadin view
-- Under the `srs/test` are located the TestBench test files
+    - `GPTInteractionManager.java` is a class that interacts with the gpt-3 api, and can use recursion for generating multiple paragraphs.
+    - `Essay.java`
+    - `MainView.java` is an main Vaadin view
+- Under the `src/test` are located the TestBench test files
 - `src/main/resources` contains configuration files and static resources
 - The `frontend` directory in the root folder contains client-side 
   dependencies and resource files. Example CSS styles used by the application 
