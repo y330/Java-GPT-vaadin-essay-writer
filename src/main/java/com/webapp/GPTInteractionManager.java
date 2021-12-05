@@ -138,12 +138,14 @@ public class GPTInteractionManager {
     private void iterateParagraphs(String prompt, int numParagraphs) {
         this.result = prompt;
         for (int i = 0; i < numParagraphs; i++) {
-            generateEssay(this.result);
+            for(String line : generateEssay(this.result)) {
+                this.result += "\n" + line; // ad   d new line
+            }
         }
 
     }
 
-    private void generateEssay(String prompt) {
+    private ArrayList<String> generateEssay(String prompt) {
         String token = System.getenv("OPENAI_TOKEN");
         OpenAiService service = new OpenAiService(token);
 
@@ -161,12 +163,9 @@ public class GPTInteractionManager {
         for (CompletionChoice line : completion.getChoices()) {
             essayArray.add(line.getText());
         }
+        return essayArray;
 
-        this.result = prompt + "";
-        // print the generated essay
-        for (String line : this.essayArray) {
-            this.result = this.result + line + "\n";
-        }
+
         // get the completion result
     }
 

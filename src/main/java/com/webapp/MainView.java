@@ -3,6 +3,7 @@ package com.webapp;
 import java.net.URL;
 
 import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -55,13 +56,13 @@ public class MainView extends VerticalLayout {
         // on click e -> {
         /* https://github.com/y330/Java-GPT-vaadin-essay-writer */
         Anchor repoAnchor = new Anchor(repoLink, "GitHub Repo");
-
+        add(repoAnchor);
 
         // Use TextField for standard text input
         TextArea textArea = new TextArea(
                 "Enter the start of your essay");
 
-        textArea.setWidth("100%");
+        textArea.setWidth((float) 900, Unit.PIXELS);
         textArea.addThemeName("bordered");
 
         // create nuber selector for nuber of paragraphs using numberfield
@@ -74,14 +75,21 @@ public class MainView extends VerticalLayout {
         numberField.setLabel("How many paragraphs do you want to generate?");
 
         Label label = new Label("🎊Congratulations, your essay is complete!😁");
-        label.add(repoAnchor);
         Dialog dialog = new Dialog(label);
         dialog.setCloseOnEsc(true);
 
+        // buttons
         Button buttonclose = new Button("X", ev -> {
             dialog.close();
         });
+        Button openintextarea = new Button("Open in textarea", e1 -> {
+            textArea.setVisible(true);
+            textArea.setValue(this.essay);
+            dialog.close();
+        });
+
         Article article = new Article(buttonclose);
+        article.add(openintextarea);
 
         Header header = new Header(new Label("Essay AI by Yonah Aviv"));
         // Button click listeners can be defined as lambda expressions
@@ -93,12 +101,6 @@ public class MainView extends VerticalLayout {
             essay = gpt.getResult();
             textArea.setValue(essay);
             dialog.open();
-            Button openintextarea = new Button("Open in textarea", e1 -> {
-                textArea.setVisible(true);
-                textArea.setValue(gpt.getResult());
-                dialog.close();
-            });
-            article.add(openintextarea);
         });
 
         dialog.add(buttonclose, article);
