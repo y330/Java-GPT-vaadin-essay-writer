@@ -58,9 +58,7 @@ public class MainView extends VerticalLayout {
         TextArea textArea = new TextArea(
                 "Enter the start of your essay");
 
-        textArea.setWidth((float) 75, Unit.VMIN);
-        textArea.addThemeName("bordered");
-
+        
         // create nuber selector for nuber of paragraphs using numberfield
         NumberField numberField = new NumberField(
                 "# of paragraphs");
@@ -80,10 +78,8 @@ public class MainView extends VerticalLayout {
             dialog.close();
         });
 
-
         Article article = new Article(buttonclose);
 
-        
         Button openintextarea = new Button("Open in editor", e1 -> {
             textArea.setVisible(true);
             textArea.setValue(this.essay);

@@ -150,10 +150,13 @@ public class GPTInteractionManager {
 
     // convert to java
     private void iterateParagraphs(String prompt, int numParagraphs) {
-        this.result = prompt;
+        this.result = "";
         for (int i = 0; i < numParagraphs; i++) {
+            if (i == 0) {
+                this.result = prompt;
+            }
             for (String line : generateEssay(this.result)) {
-                this.result += "\n" + line; // ad d new line
+                this.result += "\n" + line; // add new line
             }
         }
 
@@ -179,7 +182,6 @@ public class GPTInteractionManager {
             essayArray.add(line.getText());
         }
         return essayArray;
-
 
         // get the completion result
     }
