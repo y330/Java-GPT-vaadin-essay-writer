@@ -1,9 +1,6 @@
 package com.webapp;
 
-import java.net.URL;
-
 import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -13,7 +10,6 @@ import com.vaadin.flow.component.html.Article;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.router.Route;
