@@ -33,7 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * browser tab/window.
  */
 @Route
-@PWA(name = "Easy EssayAbstract - GPT3 for lazy peeps", shortName = "Easy EssayAbstract", description = "This is an example GPT3 used to make lives better.", enableInstallPrompt = true)
+@PWA(name = "Easy Essay - GPT3 for lazy peeps", shortName = "Easy Essay", description = "This is an example GPT3 used to make lives better.", enableInstallPrompt = true)
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/vaadin-text-field-styles.css", themeFor = "vaadin-text-field")
 public class MainView extends VerticalLayout {
@@ -53,26 +53,23 @@ public class MainView extends VerticalLayout {
     public final String repoLink = "https://github.com/y330/Java-GPT-vaadin-essay-writer";
 
     public MainView(@Autowired EssayService service) {
-        // on click e -> {
-        /* https://github.com/y330/Java-GPT-vaadin-essay-writer */
-        Anchor repoAnchor = new Anchor(repoLink, "GitHub Repo");
-        add(repoAnchor);
 
         // Use TextField for standard text input
         TextArea textArea = new TextArea(
                 "Enter the start of your essay");
 
-        textArea.setWidth((float) 900, Unit.PIXELS);
+        textArea.setWidth((float) 75, Unit.VMIN);
         textArea.addThemeName("bordered");
 
         // create nuber selector for nuber of paragraphs using numberfield
         NumberField numberField = new NumberField(
-                "Number of paragraphs");
+                "# of paragraphs");
         numberField.setHasControls(true);
+        numberField.setValue((double) 1);
         numberField.setMin(1);
-        numberField.setMax(10);
+        numberField.setMax(4);
+        numberField.setTitle("Number of Paragraphs");
         numberField.setStep(1);
-        numberField.setLabel("How many paragraphs do you want to generate?");
 
         Label label = new Label("🎊Congratulations, your essay is complete!😁");
         Dialog dialog = new Dialog(label);
@@ -82,13 +79,16 @@ public class MainView extends VerticalLayout {
         Button buttonclose = new Button("X", ev -> {
             dialog.close();
         });
-        Button openintextarea = new Button("Open in textarea", e1 -> {
+
+
+        Article article = new Article(buttonclose);
+
+        
+        Button openintextarea = new Button("Open in editor", e1 -> {
             textArea.setVisible(true);
             textArea.setValue(this.essay);
             dialog.close();
         });
-
-        Article article = new Article(buttonclose);
         article.add(openintextarea);
 
         Header header = new Header(new Label("Essay AI by Yonah Aviv"));
@@ -99,11 +99,16 @@ public class MainView extends VerticalLayout {
             numParagraphs = numberField.getValue().intValue();
             gpt.generateEssayWrapper(prompt, numParagraphs);
             essay = gpt.getResult();
-            textArea.setValue(essay);
+            article.setText(essay);
             dialog.open();
         });
 
         dialog.add(buttonclose, article);
+
+        // on click e -> {
+        /* https://github.com/y330/Java-GPT-vaadin-essay-writer */
+        Anchor repoAnchor = new Anchor(repoLink, "GitHub Repo");
+        add(repoAnchor);
 
         // Theme variants give you predefined extra styles for components.
         // Example: Primary button has a more prominent look.

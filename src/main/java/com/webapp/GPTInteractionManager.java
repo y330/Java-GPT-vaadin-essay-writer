@@ -7,6 +7,7 @@ package com.webapp;
  **/
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.theokanning.openai.OpenAiService;
 import com.theokanning.openai.completion.CompletionChoice;
@@ -77,7 +78,8 @@ public class GPTInteractionManager {
      * <p>
      * def generateEssay(prompt):
      * """
-     * Description: write a paragraph tuning the openai gpt3 parmaters to maximize relevance the content
+     * Description: write a paragraph tuning the openai gpt3 parmaters to maximize
+     * relevance the content
      * :param prompt:
      * System.out.println("\nBrewing up a story...");
      * CompletionRequest completionRequest = CompletionRequest.builder()
@@ -91,7 +93,8 @@ public class GPTInteractionManager {
      * .presencePenalty(0.0-1.0)
      * .echo(true)
      * .build();
-     * CompletionResult completion = service.createCompletion("davinci", completionRequest);
+     * CompletionResult completion = service.createCompletion("davinci",
+     * completionRequest);
      * for (CompletionChoice line : completion.getChoices()) {
      * essayArray.add(line.getText());
      * }
@@ -101,35 +104,46 @@ public class GPTInteractionManager {
      * different custom params:
      * <p>
      * maxlength: max number of words in the generated essay
-     * temperature: a float between 0 and 1, defines how much of the probability distribution is
+     * temperature: a float between 0 and 1, defines how much of the probability
+     * distribution is
      * used to select the next word.
-     * topp: a float between 0 and 1, defines how much of the probability distribution is
+     * topp: a float between 0 and 1, defines how much of the probability
+     * distribution is
      * used to select the next word.
-     * topk: a positive integer, defines how many of the top probabilities are used to
+     * topk: a positive integer, defines how many of the top probabilities are used
+     * to
      * select the next word.
-     * norepeatngramsize: a positive integer, defines how many words back to look for
+     * norepeatngramsize: a positive integer, defines how many words back to look
+     * for
      * ngram repeats.
-     * numreturnsequences: a positive integer, defines the number of sequences to generate.
+     * numreturnsequences: a positive integer, defines the number of sequences to
+     * generate.
      * If 1, a single sequence is generated.
-     * numbeams: a positive integer, defines how many beams to break the generated sequences
+     * numbeams: a positive integer, defines how many beams to break the generated
+     * sequences
      * into.
      * earlystopping: a boolean, defines whether to stop early if we've reached the
      * numbeams limit.
-     * lengthpenalty: a float between 0 and 1, defines how much to penalize short generated
+     * lengthpenalty: a float between 0 and 1, defines how much to penalize short
+     * generated
      * sequences.
      * numsamples: a positive integer, defines how many samples to generate.
      * If 1, a single sample is generated.
-     * numreturnsequences: a positive integer, defines the number of sequences to generate.
+     * numreturnsequences: a positive integer, defines the number of sequences to
+     * generate.
      * If 1, a single sequence is generated.
-     * numbeams: a positive integer, defines how many beams to break the generated sequences
+     * numbeams: a positive integer, defines how many beams to break the generated
+     * sequences
      * into.
      * earlystopping: a boolean, defines whether to stop early if we've reached the
      * numbeams limit.
-     * lengthpenalty: a float between 0 and 1, defines how much to penalize short generated
+     * lengthpenalty: a float between 0 and 1, defines how much to penalize short
+     * generated
      * sequences.
      * numsamples: a positive integer, defines how many samples to generate.
      * If 1, a single sample is generated.
-     * numreturnsequences: a positive integer, defines the number of sequences to generate.
+     * numreturnsequences: a positive integer, defines the number of sequences to
+     * generate.
      * If 1, a single sequence is generated
      * """
      */
@@ -138,8 +152,8 @@ public class GPTInteractionManager {
     private void iterateParagraphs(String prompt, int numParagraphs) {
         this.result = prompt;
         for (int i = 0; i < numParagraphs; i++) {
-            for(String line : generateEssay(this.result)) {
-                this.result += "\n" + line; // ad   d new line
+            for (String line : generateEssay(this.result)) {
+                this.result += "\n" + line; // ad d new line
             }
         }
 
@@ -148,18 +162,19 @@ public class GPTInteractionManager {
     private ArrayList<String> generateEssay(String prompt) {
         String token = System.getenv("OPENAI_TOKEN");
         OpenAiService service = new OpenAiService(token);
-
+        List<String> stops = List.of(".\n");
         System.out.println("\nBrewing up a story...");
         CompletionRequest completionRequest = CompletionRequest.builder()
                 .prompt(prompt)
                 .temperature(0.7)
-                .maxTokens(180)
+                .maxTokens(100)
                 .topP(1.0)
                 .frequencyPenalty(0.7)
                 .presencePenalty(1.0)
+                .stop(stops)
                 .echo(false)
                 .build();
-        CompletionResult completion = service.createCompletion("davinci", completionRequest);
+        CompletionResult completion = service.createCompletion("curie", completionRequest);
         for (CompletionChoice line : completion.getChoices()) {
             essayArray.add(line.getText());
         }
