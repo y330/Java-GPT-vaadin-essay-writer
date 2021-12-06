@@ -54,7 +54,7 @@ public class GPTInteractionManager {
     public void generateEssayWrapper(String prompt, int numParagraphs) {
         this.promptText = "";
         iterateParagraphs(prompt, numParagraphs);
-        System.out.println(this.essayArray);
+        System.out.println(this.result);
     }
 
     public void generateEssayWrapper() {
@@ -150,13 +150,13 @@ public class GPTInteractionManager {
 
     // convert to java
     private void iterateParagraphs(String prompt, int numParagraphs) {
-        this.result = "";
         for (int i = 0; i < numParagraphs; i++) {
             if (i == 0) {
                 this.result = prompt;
             }
-            for (String line : generateEssay(this.result)) {
-                this.result += "\n" + line; // add new line
+            ArrayList<String> arraylist = this.generateEssay(this.result);
+            for (String line : arraylist) {
+                this.result += line;
             }
         }
 
@@ -175,13 +175,14 @@ public class GPTInteractionManager {
                 .frequencyPenalty(0.7)
                 .presencePenalty(1.0)
                 .stop(stops)
-                .echo(false)
+                .echo(true)
                 .build();
         CompletionResult completion = service.createCompletion("curie", completionRequest);
         for (CompletionChoice line : completion.getChoices()) {
-            essayArray.add(line.getText());
+            this.essayArray.add(line.getText());
         }
-        return essayArray;
+
+        return this.essayArray;
 
         // get the completion result
     }
