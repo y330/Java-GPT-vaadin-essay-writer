@@ -2,7 +2,16 @@ Link: https://essay-ai-gpt3.herokuapp.com
 
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/68514914/144498549-53d912af-046a-4003-b428-5aad3fd36c81.png">
 
+## Background
 
+OpenAI best generative language model in 2021, GPT-3, had a maximum token limit of 2048 (1500 words), which created a severe obstacle on generating extra-long articles. I developed an algorithm that enhanced the functionality of GPT-3 to create infinitely long articles, maintaining context throughout.
+
+The algorithm is as follows:
+essay = user inputted prompt.
+1. essaybot creates a new prompt from \[first few sentences of essay, last few sentences of essay\]
+2. gpt-3 sends a response
+3. essay = original prompt + response. repeat steps 1,2 n times using the new essay, where n is the number of paragraphs the user requested
+Otherwise unacheivable using gpt-3 regulary as it exceeds the max token amount. Additionally, it keeps the context of the essay throughout the whole process.
 
 ## Project structure
 
