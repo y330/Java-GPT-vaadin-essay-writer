@@ -8,9 +8,10 @@ OpenAI best generative language model in 2021, GPT-3, had a maximum token limit 
 
 The algorithm is as follows:
 essay = user inputted prompt.
-1. essaybot creates a new prompt from \[first few sentences of essay, last few sentences of essay\]
-2. gpt-3 sends a response
-3. essay = original prompt + response. repeat steps 1,2 n times using the new essay, where n is the number of paragraphs the user requested
+1. essaybot creates a new prompt from \[first few sentences of essay, last few sentences of essay\]]
+2. send the new prompt to gpt-3 with my fine tuned parameters
+3. gpt-3 sends a response
+4. essay = original prompt + response. repeat steps 1,2 n times using the new essay, where n is the number of paragraphs the user requested
 Otherwise unacheivable using gpt-3 regularly as it exceeds the max token amount. Additionally, it keeps the context of the essay throughout the whole process.
 
 ## Project structure
